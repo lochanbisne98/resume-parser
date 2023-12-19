@@ -175,7 +175,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Softon\LaravelFaceDetect\FaceDetectServiceProvider::class,
+        //Softon\LaravelFaceDetect\FaceDetectServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
     ],

@@ -55,8 +55,8 @@ class HomeController extends BaseController
                 exec($cmd, $output, $return);
             }
 
-            $pdf  = storage_path() . "/app/public/cv/" . $hash . ".pdf";
-
+           // $pdf  = storage_path() . "/app/public/cv/" . $hash . ".pdf";
+            $pdf  = storage_path() . "\app\public\cv\\" . $hash . ".pdf";
             $user = $this->getData($pdf, $hash);
 
             //dd($user);
@@ -69,12 +69,13 @@ class HomeController extends BaseController
     }
 
     public function getData($pdf, $hash){
-
-        $text = (new Pdf(env('PATH_PDFTOTEXT')))
+        $pathPdftoText = 'D:\WorkSpace\resume\pdftotext.exe';
+        $text = (new Pdf($pathPdftoText))
             ->setPdf($pdf)->text();
 
-        $textLayout = (new Pdf(env('PATH_PDFTOTEXT')))
-            ->setOptions(['layout', 'r 96'])
+        $textLayout = (new Pdf($pathPdftoText))
+            ->setOptions(['layout'])
+            //->setOptions(['layout', 'r 96'])
             ->setPdf($pdf)->text();
 
         //dd($text);
@@ -92,7 +93,7 @@ class HomeController extends BaseController
         $user->github      = $this->getGithubProfile($text);
         $user->skills      = $this->getSkills($text);
         $user->languages   = $this->getLanguages($text);
-        $user->image       = $this->getProfilePicture($pdf, $hash);
+        //$user->image       = $this->getProfilePicture($pdf, $hash);
 
 
 
@@ -113,7 +114,7 @@ class HomeController extends BaseController
 
         foreach ($dirs as $dir){
 
-            $dir = storage_path() . '/app/public/'.$dir;
+            $dir = storage_path() . '\app\public\\'.$dir;
 
             $files = glob($dir . '/*');
             foreach ($files as $file) {
@@ -322,7 +323,7 @@ class HomeController extends BaseController
 
     public function getProfilePicture($pdf, $hash){
 
-        $tmp = storage_path() . '/app/public/tmp';
+        $tmp = storage_path() . '\app\public\tmp';
 
         $cmd = env('PATH_PDFIMAGES') . ' -all -f 1 ' . $pdf . ' ' . $tmp . '/prefix';
         exec($cmd);
@@ -362,7 +363,7 @@ class HomeController extends BaseController
                 $isFace = FaceDetect::extract($tmp . '/' . $image)->face_found;
 
                 if ($isFace) {
-                    $imageDir = storage_path() . "/app/public/images/".$hash . ".jpg";
+                    $imageDir = storage_path() . "\app\public\images\\".$hash . ".jpg";
                     FaceDetect::extract($tmp . '/' . $image)->save($imageDir);
                     break;
                 }

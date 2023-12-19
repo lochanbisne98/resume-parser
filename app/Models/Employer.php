@@ -13,6 +13,7 @@ class Employer extends Model
 
     public static function getEmployers(){
 
-        return self::whereRaw('CHAR_LENGTH(name) > 4')->orderByRaw('CHAR_LENGTH(name) DESC')->pluck('name')->toArray();
+        // return self::whereRaw('LEN(name) > 4')->orderByRaw('LEN(name) DESC')->pluck('name')->toArray();
+        return [];
     }
 }

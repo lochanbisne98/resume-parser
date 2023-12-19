@@ -13,6 +13,6 @@ class Position extends Model
 
     public static function getPositions(){
 
-        return self::orderByRaw('CHAR_LENGTH(name) DESC')->pluck('name')->toArray();
+        return self::orderByRaw('LEN(name) DESC')->pluck('name')->toArray();
     }
 }

@@ -17,7 +17,6 @@
         "web64/laravel-nlp": "^0.30.1",
         "web64/php-nlp-client": "^0.40.3",
         "nlp-tools/nlp-tools": "1.0.*@dev",
-        "softon/laravel-face-detect": "dev-master",
         "intervention/image": "^2.4",
         "ext-json": "*"
     },
